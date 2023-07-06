@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/themes/ui-darkness/jquery.ui.base.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <input class="form-control" ID="SearchText" placeholder="Search expression" />
+    </div>
+
+    <input type="text" id="search-input">
+
+    <input type="text" 
+           id="auto" 
+           placeholder="enter something" />
+
+
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SearchText").autocomplete({
+                minLength: 4,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "http://192.168.160.58/Olympics/api/countries",
+                        data: "{'DName':'" + $('#SearchText').val() + "'}",
+                        dataType: "json",
+                        success: function (data) {
+                            response(data.d);
+                        },
+                        error: function (result) {
+                            alert(result.statusText);
+                        }
+                    });
+                }
+            });
+        });
+    
+        $(document).ready(function () {
+            $( "#search-input" ).autocomplete({
+                source: function(request, response) {
+                // Perform an AJAX request to get autocomplete values
+                    $.ajax({
+                    url: "http://192.168.160.58/Olympics/api/countries",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                        },
+                success: function(data) {
+                    response(data);
+                        }
+                    });
+                }
+        });
+    });
+
+    
+        </script>
+    <script>
+        $(document).ready(function() {
+    // array of items.
+    var items = [
+        "C++",
+        "Java",
+        "Python",
+        "C#",
+        "DSA",
+        "STL",
+        "Self Placed",
+        "Android",
+        "Kotlin",
+        "GeeksforGeeks",
+        "GFG",
+    ];
+    // jQuery inbuild function
+    $("#auto").autocomplete({
+        source: items // list of items.
+    });
+})
+    </script>
+</body>
+</html>

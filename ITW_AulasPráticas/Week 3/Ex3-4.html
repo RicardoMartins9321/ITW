@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site 5</title>
+</head>
+<body>
+    <h1>Informação Pessoal</h1>
+    <form name="PersonData" action="http://192.168.160.36/FormEcho.aspx" method="post">
+        <input type="hidden" name="FormName" value="UserForm" />
+        <dl>
+            <fieldset><dt>Nome:</dt>
+                <legend>Informação Pesoal</legend>
+                <dd>
+                    <input type="text" name="FirstName" value="Joaquim" placeholder="Nome" />
+                </dd>
+            <dt>Sobrenome</dt>
+                <dd>
+                    <input type="text" name="LastName" placeholder="Sobrenome" />
+                </dd>
+            <dt>Palavra-Passe:</dt>
+                <dd>
+                    <input type="password" name="Password" placeholder="Digite a palavra passe" />
+                </dd>
+            </fieldset>
+
+        <br>
+
+            <fieldset>
+                <legend>Comentários</legend>
+                <dt>
+                    <textarea name="Comments" rows="4" cols="80" placeholder="Insira os seus comentários"></textarea>
+                </dt>
+            </fieldset>
+
+        <hr>
+            
+                <dt>
+                    <input name="Button" type="Submit" />
+                    <input type="reset" name="resetBtn" value="Reset" />
+                </dt>
+        </dl>
+    </form>
+</body>
+</html>
+

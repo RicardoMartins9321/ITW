@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drivers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="icon" href="../Imagens/Imagem header/logovermelho.png" />
+    <link rel="stylesheet" href="../Styles/styles.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-5">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img style="width: 120px" src="../Imagens/Imagem header/logovermelho.png" alt="logo" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link active" href="drivers.html">Drivers</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Champions
+                </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="champions.html">Drivers</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="champteams.html">Constructors</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Standings
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="seasonsDrivers.html">Drivers</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="seasonsConstructors.html">Constructors</a>
+                    </li>
+                </ul>
+            </li>
+              <a class="nav-link" href="circuits.html">Circuits</a>
+                                    <a class="nav-link" href="races.html">Races</a>
+                                    <a class="nav-link" href="teams.html">Teams</a>
+                                    <a class="nav-link" href="aboutus.html">About Us</a>
+                                    <a class="nav-link" href="profile.html"><i class="fa fa-heart"></i
+              ></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- main stuff -->
+    <!-- CENA -->
+    <div class="container">
+        <div class="row small">
+            <div class="border-bottom">
+                <!-- ko if: records().length>0 -->
+                <h2 style="float: left" data-bind="html:displayName"></h2>
+                <!-- /ko -->
+                <!-- ko ifnot: records().length>0 -->
+                <h2 style="float: left"><b>No Results Found</b></h2>
+                <!-- /ko -->
+                <form class="form-check form-check-inline" id="forms1" style="float: right" role="search">
+                    <input id="searchbarall" class="form-control" type="search" placeholder="Search" aria-label="Search" style="
+                border-style: solid;
+                border-width: 1px;
+                background-color: rgb(53, 53, 53);
+                width: 400px;
+                float: left;
+                color: white;
+              " />
+                    <!-- já seleciona o input n é preciso selecionar este_tabindex=-1 -->
+                    <button class="btn" id="lupadef" type="submit" data-bind="click:pesquisa" style="float: right" tabindex="-1">
+              <i class="fa fa-search" style="color: black"></i>
+            </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- CENA -->
+
+        <!-- ko if:records().length > 0 -->
+        <div class="row small" style="clear: both">
+            <p class="col-lg-4 mr-auto pt-2">
+                <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span
+          ><br />
+          <span
+            data-bind="html: 'Drivers: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"
+          ></span>
+            </p>
+            <!-- ko ifnot:pesquisado -->
+            <div class="col-lg-4 col-md-2 pt-3">
+                <div class="dropdown">
+                    <!-- ko ifnot:nationId -->
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              Filter:
+            </button>
+                    <!-- /ko -->
+                    <!-- ko if:nationId -->
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              Nationalities
+            </button>
+                    <!-- /ko -->
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <li>
+                            <a class="dropdown-item" href="#">Nationalities &raquo;</a>
+                            <ul class="dropdown-menu-dark dropdown-menu2" style="
+                    list-style-type: none;
+                    height: 350px;
+                    overflow-y: scroll;
+                  ">
+                                <li data-bind="foreach:nationalities()">
+                                    <!-- ko ifnot: Name=='Belgium' || Name== 'Hong Kong'-->
+                                    <a class="dropdown-item" data-bind="attr: { href: './drivers.html?Nid=' + NationalityId}, text:Name"></a>
+                                    <!-- /ko -->
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- ko ifnot:nationId -->
+                        <li>
+                            <a class="dropdown-item" href="#">Sort by &raquo;</a>
+                            <ul class="dropdown-menu-dark dropdown-menu2" style="list-style-type: none">
+                                <li>
+                                    <a class="dropdown-item" data-bind="attr:{href:'./drivers.html?sortfield=nationality'}">Nationality</a
+                    >
+                  </li>
+                  <li data-bind="">
+                    <a
+                      class="dropdown-item"
+                      data-bind="attr:{href:'./drivers.html?sortfield=id'}"
+                      >Id</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <!-- /ko -->
+            </ul>
+          </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko ifnot:nationId-->
+
+        <!-- ko ifnot: pesquisado -->
+
+        <!-- Paginação_Drivers-->
+        <div class="col-lg-4 col-md-8 my-0 pt-3" style="text-align: center">
+          <ul class="pagination float-end">
+            <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+            <li class="page-item float-end">
+              <!-- ko ifnot: sortfield -->
+              <a
+                class="page-link"
+                title="First Page"
+                data-bind="attr: { href: './drivers.html?page=' + '1',  rel:'prev'}"
+                >⇤</a
+              >
+              <!-- /ko -->
+              <!-- ko if: sortfield -->
+              <a
+                class="page-link"
+                title="First Page"
+                data-bind="attr: { href: './drivers.html?page=' + '1' + '&sortfield=' + sortfield(),  rel:'prev'}"
+                >⇤</a
+              >
+              <!-- /ko -->
+            </li>
+            <li class="page-item float-end">
+              <!-- ko ifnot: sortfield -->
+              <a
+                class="page-link"
+                title="Previous Page"
+                data-bind="attr: { href: './drivers.html?page=' + previousPage(),  rel:'prev'}"
+                >←</a
+              >
+              <!-- /ko -->
+              <!-- ko if: sortfield -->
+              <a
+                class="page-link"
+                title="Previous Page"
+                data-bind="attr: { href: './drivers.html?page=' + previousPage() + '&sortfield=' + sortfield(),  rel:'prev'}"
+                >←</a
+              >
+              <!-- /ko -->
+            </li>
+            <!-- /ko -->
+            <!-- ko foreach: pageArray()-->
+            <!-- ko if:$data == $parent.currentPage() -->
+            <li class="active page-item">
+              <a
+                class="page-link"
+                data-bind="attr: { title:'Current Page ' + $data }, text: $data"
+              ></a>
+                                </li>
+                                <!-- /ko -->
+                                <!-- ko if:$data != $parent.currentPage() -->
+                                <li class="page-item">
+                                    <!-- ko ifnot:$parent.sortfield() -->
+                                    <a class="page-link" data-bind="attr: { href: './drivers.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                                    <!-- /ko -->
+                                    <!-- ko if:$parent.sortfield() -->
+                                    <a class="page-link" data-bind="attr: { href: './drivers.html?page=' + $data + '&sortfield=' + $parent.sortfield(), title:'Goto Page ' + $data }, text:$data"></a>
+                                    <!-- /ko -->
+                                </li>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                                <li class="page-item">
+                                    <!-- ko ifnot: sortfield -->
+                                    <a class="page-link" title="Next Page" data-bind="attr: { href: './drivers.html?page=' + nextPage(), rel:'next' }">→</a
+              >
+              <!-- /ko -->
+              <!-- ko if: sortfield -->
+              <a
+                class="page-link"
+                title="Next Page"
+                data-bind="attr: { href: './drivers.html?page=' + nextPage() + '&sortfield=' + sortfield(), rel:'next' }"
+                >→</a
+              >
+              <!-- /ko -->
+            </li>
+            <li class="page-item">
+              <!-- ko ifnot: sortfield -->
+              <a
+                class="page-link"
+                title="Last Page"
+                data-bind="attr: { href: './drivers.html?page=' + totalPages() }"
+                >⇥</a
+              >
+              <!-- /ko -->
+              <!-- ko if: sortfield -->
+              <a
+                class="page-link"
+                title="Last Page"
+                data-bind="attr: { href: './drivers.html?page=' + totalPages() + '&sortfield=' + sortfield()}"
+                >⇥</a
+              >
+              <!-- /ko -->
+            </li>
+            <!-- /ko -->
+          </ul>
+        </div>
+
+        <!-- /ko -->
+
+        <!-- /ko -->
+
+        <!-- INÍCIO Paginação_SearchDrivers-->
+        <!-- ko if: pesquisado -->
+        <div class="col-lg-8 col-md-2 my-0 pt-3">
+          <ul class="pagination float-end">
+            <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+            <li class="page-item float-end">
+              <a
+                class="page-link"
+                title="First Page"
+                data-bind="attr: { href: './drivers.html?search='+ pesquisado() + '&page=1',  rel:'prev'}"
+                >⇤</a
+              >
+            </li>
+            <li class="page-item float-end">
+              <a
+                class="page-link"
+                title="Previous Page"
+                data-bind="attr: { href: './drivers.html?search='+ pesquisado() + '&page=' + previousPage(),  rel:'prev'}"
+                >←</a
+              >
+            </li>
+            <!-- /ko -->
+            <!-- ko foreach: pageArray()-->
+            <!-- ko if:$data == $parent.currentPage() -->
+            <li class="active page-item">
+              <a
+                class="page-link"
+                data-bind="attr: { title:'Current Page ' + $data }, text: $data"
+              ></a>
+                                </li>
+                                <!-- /ko -->
+                                <!-- ko if:$data != $parent.currentPage() -->
+                                <li class="page-item">
+                                    <a class="page-link" data-bind="attr: { href: './drivers.html?search='+ $parent.pesquisado() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                                </li>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                                <li class="page-item">
+                                    <a class="page-link" title="Next Page" data-bind="attr: { href: './drivers.html?search='+ pesquisado() + '&page=' + nextPage(), rel:'next' }">→</a
+              >
+            </li>
+            <li class="page-item">
+              <a
+                class="page-link"
+                title="Last Page"
+                data-bind="attr: { href: './drivers.html?search='+ pesquisado() + '&page=' + totalPages() }"
+                >⇥</a
+              >
+            </li>
+            <!-- /ko -->
+          </ul>
+        </div>
+        <!-- /ko -->
+
+        <!-- NATIONALITIES - não precisa de controlos de páginas porque nenhuma nationalidade tem mais de 8 páginas-->
+        <!-- ko if:nationId-->
+        <div class="col-lg-4 col-md-8 col-md-2 my-0 pt-3">
+          <ul class="pagination float-end">
+            <!-- ko foreach: pageArray()-->
+            <!-- ko if:$data == $parent.currentPage() -->
+            <li class="active page-item">
+              <a
+                class="page-link"
+                data-bind="attr: { title:'Current Page ' + $data }, text: $data"
+              ></a>
+                                </li>
+                                <!-- /ko -->
+                                <!-- ko if:$data != $parent.currentPage() -->
+                                <li class="page-item">
+                                    <a class="page-link" data-bind="attr: { href: './drivers.html?Nid='+ $parent.nationId() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                                </li>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </ul>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+
+            <!-- ko if: records().length>0 -->
+            <table class="table table-striped table-sm small">
+                <thead class="bg-danger text-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Nationality</th>
+                        <th scope="col" class="text-right"></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: records">
+                    <tr id="tabela">
+                        <td class="align-middle" data-bind="text:DriverId"></td>
+                        <td class="align-middle" data-bind="text:Name"></td>
+                        <td class="align-middle" data-bind="text:Nationality"></td>
+                        <td class="text-end">
+                            <a class="btn btn-default btn-light btn-sm" data-bind="attr: { href:'./driverDetails.html?id=' + DriverId }"><i class="fa fa-eye" title="Selecione para ver detalhes"></i
+              ></a>
+                            <button type="button" class="btn btn-default btn-sm" id="favs-button" data-bind="click:$parent.updateMetaData.bind($data,DriverId,'favs')" title="Selecione para adicionar aos favoritos">
+                <i
+                  aria-hidden="true"
+                  data-bind="class: 'fa fa-heart-o ' + DriverId
+                  "
+                ></i>
+              </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- /ko -->
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-light">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <img src="../Imagens/Imagem header/logovermelho.png" height="30" /> Loading data...
+                        </h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="spinner-border text-danger" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of main stuff -->
+        <!-- navbar no fim -->
+        <div class="footer">
+            <!-- Footer -->
+            <footer class="bg-dark text-center text-white mt-2">
+                <!-- Grid container -->
+                <div class="container p-4">
+                    <!-- Section: Social media -->
+                    <section class="mb-4">
+                        <a href="#nav" class="sr-only sr-only-focusable nav-link mb-3" style="color: white; font-size: larger">Skip footer</a
+            >
+            <!-- Facebook -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="https://www.facebook.com/Formula1/"
+              role="button"
+              ><i class="fa fa-facebook-f"></i
+            ></a>
+
+                        <!-- Twitter -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/F1?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" role="button"><i class="fa fa-twitter"></i
+            ></a>
+
+                        <!-- Google -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://www.formula1.com/" role="button"><i class="fa fa-google"></i
+            ></a>
+
+                        <!-- Instagram -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/f1/" role="button"><i class="fa fa-instagram"></i
+            ></a>
+
+                        <!-- Linkedin -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/company/formula-one-management-ltd/" role="button"><i class="fa fa-linkedin"></i
+            ></a>
+                    </section>
+                    <!-- Section: Social media -->
+
+                    <!-- Section: Form -->
+                    <section class="">
+                        <form action="">
+                            <!--Grid row-->
+                            <div class="row d-flex justify-content-center me-2">
+                                <!--Grid column-->
+                                <div class="col-auto">
+                                    <p class="pt-2">
+                                        <strong>Sign up for our newsletter</strong>
+                                    </p>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-md-5 col-12">
+                                    <!-- Email input -->
+                                    <div class="form-outline form-white mb-4">
+                                        <input style="border: 1px solid white" type="email" id="form5Example21" class="form-control" placeholder="Enter your email address" required />
+                                    </div>
+                                </div>
+                                <!--Grid column-->
+
+                                <!--Grid column-->
+                                <div class="col-auto">
+                                    <!-- Submit button -->
+                                    <button type="submit" class="btn btn-outline-light mb-4">
+                    Subscribe
+                  </button>
+                                </div>
+                                <!--Grid column-->
+                            </div>
+                            <!--Grid row-->
+                        </form>
+                    </section>
+                    <!-- Section: Form -->
+                </div>
+                <!-- Grid container -->
+            </footer>
+        </div>
+        <!-- scripts -->
+        <!-- scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="../Scripts/knockout-3.5.1.js"></script>
+        <script src="../Scripts/jquery-3.6.0.min.js"></script>
+        <script src="../Scripts/drivers2.js"></script>
+</body>
+
+</html>

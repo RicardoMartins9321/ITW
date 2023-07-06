@@ -1,0 +1,145 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Medals by Country</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.1/chart.min.js"></script>
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="myCSS.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="http://192.168.160.58/Olympics/Images/Olympic_rings.svg" height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="athletes.html"><i class="fa-regular fa-user text-dark"></i> Athletes</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-trophy text-warning"></i> Competitions</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class="fa-regular fa-flag text-success"></i> Countries</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="games.html"><i class="fa-solid fa-location-dot text-danger"></i> Games</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa-regular fa-futbol text-primary"></i> Modalities</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="map.html"><i class="fa-solid fa-map-location-dot text-success"></i> Map</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-chart-column text-info"></i>Statistics</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="statistics1.html">Medals by Country</a></li>
+                            <li><a class="dropdown-item" href="statistics2.html">Countries by Games</a></li>
+                            <li><a class="dropdown-item" href="statistics3.html">Athletes by Games</a></li>
+                        </ul>
+                    </li>                         
+                    <li class="nav-item"><a href="favorites.html" class="nav-link"><i class="fa-solid fa-heart"></i> Favorites</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Working Area -->
+    <div class="container">
+        <div class="border-bottom py-2 mb-2">
+            <h2>Medals by Country in all Olympic Games editions</h2>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <th class="bg-dark text-light">CountryID</th>
+            <th class="bg-dark text-light">CountryName</th>
+            <th colspan="3" class="bg-dark text-light">Medals</th>
+            </thead>
+            <tbody data-bind="foreach: Medals">
+                <tr>
+                    <td data-bind="text: CountryId"></td>
+                    <td data-bind="text: CountryName"></td>
+                    <td data-bind="text: 'Gold: ' + Medals[0].Counter"></td>
+                    <td data-bind="text: 'Silver: ' + Medals[1].Counter"></td>
+                    <td data-bind="text: 'Bronze: ' + Medals[2].Counter"></td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <!-- End of Working Area -->
+    <!-- navbar no fim -->
+    <div class="footer">
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center">
+            <!-- Grid container -->
+            <div class="container p-4">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                        <h5>Policies</h5>
+                        <ul>
+                            <li><a href="cookiePolicy.html" target="_blank">Cookie Policy</a></li>
+                            <li><a href="privacyPolicy.html" target="_blank">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                        <h5>About Us</h5>
+                        <ul>
+                            <li><a href="about.html" target="_blank">Team</a></li>
+                            <li><a href="about.html" target="_blank">Careers</a></li><br>
+                        </ul>
+                    </div>
+            
+                <!-- Section: Social media -->
+                <section class="mb-4">
+              
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/olympics/" role="button"
+                    alt="Facebook Logo" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/Olympics" role="button"
+                    alt="Twitter Logo" title="Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/Olympics/" role="button"
+                    alt="Instagram Logo" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <!-- TikTok -->
+                    <a class = "btn btn-outline-light btn-floating m-1" href="https://www.tiktok.com/@olympics" role="button"
+                    alt="TikTok Logo" title="Tiktok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <!-- Snapchat -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.snapchat.com/add/olympics" role="button"
+                    alt="Snapchat Logo" title="Snapchat" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+                    <!-- Youtube -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/olympics" role="button"
+                    alt="Youtube Logo" title="Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <!-- Google -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://olympics.com/en/athletes/" role="button"
+                    alt="Google Logo" title="Google" target="_blank"><i class="fa-brands fa-google"></i></a>
+                
+                </section>
+                <hr>
+                <span class="b2p-footer__copy text-body-sm">
+                    <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2022/23</div>
+                </span>
+            </div>
+        <!-- Grid container -->
+        </footer>
+    </div>
+
+    
+    <!-- ChartJS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- KnockoutJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="statistics1.js"></script>
+</body>
+</html>
+

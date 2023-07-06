@@ -1,0 +1,26 @@
+table {
+    margin: auto;
+    border: 1px red; /* Takes out the black border around the table */
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+.white{
+    background-color: rgb(252, 244, 234);
+    font-size: 70px;
+    vertical-align: middle;
+}
+
+
+.black{
+    background-color: rgb(110, 110, 110);
+    font-size: 70px;
+    
+}
+
+td {
+    width: 80px;
+    height: 80px;
+    border: 1px black;
+    align-items: center; /* Did not find a purpose for this */
+}

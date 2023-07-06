@@ -1,0 +1,287 @@
+// ViewModel KnockOut
+var vm = function () {
+    console.log('ViewModel initiated...');
+    //---Variáveis locais
+    var self = this;
+    self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/athletes');
+    //self.baseUri = ko.observable('http://localhost:62595/api/drivers');
+    self.displayName = 'Athletes List';
+    self.error = ko.observable('');
+    self.passingMessage = ko.observable('');
+    self.records = ko.observableArray([]);
+    self.ord = [
+        { name: "A-Z", value: "NameUp" },
+        { name: "Z-A", value: "NameDn" },
+        { name: "Feminine", value: "SexUp" },
+        { name: "Male", value: "SexDn" },
+    ];
+    escolha = ko.observable('')
+    self.favourites = ko.observableArray([]);
+    self.currentPage = ko.observable(1);
+    self.pagesize = ko.observable(20);
+    self.totalRecords = ko.observable(50);
+    self.hasPrevious = ko.observable(false);
+    self.hasNext = ko.observable(false);
+    self.previousPage = ko.computed(function () {
+        return self.currentPage() * 1 - 1;
+    }, self);
+    self.nextPage = ko.computed(function () {
+        return self.currentPage() * 1 + 1;
+    }, self);
+    self.fromRecord = ko.computed(function () {
+        return self.previousPage() * self.pagesize() + 1;
+    }, self);
+    self.toRecord = ko.computed(function () {
+        return Math.min(self.currentPage() * self.pagesize(), self.totalRecords());
+    }, self);
+    self.totalPages = ko.observable(0);
+    self.pageArray = function () {
+        var list = [];
+        var size = Math.min(self.totalPages(), 9);
+        var step;
+        if (size < 9 || self.currentPage() === 1)
+            step = 0;
+        else if (self.currentPage() >= self.totalPages() - 4)
+            step = self.totalPages() - 9;
+        else
+            step = Math.max(self.currentPage() - 5, 0);
+
+        for (var i = 1; i <= size; i++)
+            list.push(i + step);
+        return list;
+    };
+    self.toggleFavourite = function (id) {
+        if (self.favourites.indexOf(id) == -1) {
+            self.favourites.push(id);
+        }
+        else {
+            self.favourites.remove(id);
+        }
+        localStorage.setItem("fav", JSON.stringify(self.favourites()));
+    };
+    self.SetFavourites = function () {
+        let storage;
+        try {
+            storage = JSON.parse(localStorage.getItem("fav"));
+        }
+        catch (e) {
+            ;
+        }
+        if (Array.isArray(storage)) {
+            self.favourites(storage);
+        }
+    }
+
+    self.ordenar = function () {
+        var id = getUrlParameter('page');
+        if (id == undefined) {
+            id = 1;
+        }
+        var link = self.baseUri() + "?page=" + self.currentPage() + "&page=" + id + "&pageSize=" + self.pagesize() + "&sortby=" + escolha();
+        ajaxHelper(link, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.records(data.Records);
+            self.totalRecords(data.TotalRecords);
+            self.currentPage(pg);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.loadFavourites();
+        });
+    }
+
+
+    //--- Page Events
+    self.activate = function (id,sortfield='name') {
+        console.log('CALL: getAthletes...');
+        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize() + "&sortfield=" + sortfield;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            self.SetFavourites();
+        });
+    };
+
+    // Displays the page with info from the api Athletes/SearchByName?q=
+    self.activate2 = function(search, page) {
+        console.log('CALL: searchAthletes...');
+        var composedUri = "http://192.168.160.58/Olympics/api/Athletes/SearchByName?q=" + search;
+        ajaxHelper(composedUri, 'GET').done(function(data) {
+            console.log("searchAthletes", data);
+            hideLoading();
+            self.records(data.slice(0 + 21 * (page - 1), 21 * page));
+            console.log(self.records())
+            self.totalRecords(data.length);
+            self.currentPage(page);
+            if (page == 1) {
+                self.hasPrevious(false)
+            } else {
+                self.hasPrevious(true)
+            }
+            if (self.records() - 21 > 0) {
+                self.hasNext(true)
+            } else {
+                self.hasNext(false)
+            }
+            if (Math.floor(self.totalRecords() / 21) == 0) {
+                self.totalPages(1);
+            } else {
+                self.totalPages(Math.ceil(self.totalRecords() / 21));
+            }
+            console.log(self.records()[0].Id)
+        });
+
+    };
+
+    // should update the local storage, but doesn't
+    self.updateLocalStorage = (key, data) => {
+        localStorage.setItem(key, JSON.stringify(data))
+        console.log(data)
+    }
+
+    //--- Internal functions
+    function ajaxHelper(uri, method, data) {
+        self.error(''); // Clear error message
+        return $.ajax({
+            type: method,
+            url: uri,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: data ? JSON.stringify(data) : null,
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("AJAX Call[" + uri + "] Fail...");
+                hideLoading();
+                self.error(errorThrown);
+            }
+        });
+    }
+    
+
+    function sleep(milliseconds) {
+        const start = Date.now();
+        while (Date.now() - start < milliseconds);
+    }
+
+    function showLoading() {
+        $("#myModal").modal('show', {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+    function hideLoading() {
+        $('#myModal').on('shown.bs.modal', function (e) {
+            $("#myModal").modal('hide');
+        })
+    }
+
+    function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        console.log("sPageURL=", sPageURL);
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+
+    // sets the sPageUrl to wherever your searched
+    self.pesquisa = function() {
+        self.pesquisado($("#searchbarall").val().toLowerCase());
+        if (self.pesquisado().length > 0) {
+            window.location.href = "athletes.html?search=" + self.pesquisado();
+        }
+    }
+
+    //--- start ....
+    showLoading();
+    $("#searchbarall").val(undefined) // resets the searchbar
+    var pg = getUrlParameter('page');
+    console.log(pg);
+    self.pesquisado = ko.observable(getUrlParameter('search'));
+    self.sortfield = ko.observable(getUrlParameter('sortfield'));
+    if (self.pesquisado() == undefined) {
+        if (pg == undefined) {
+            if (self.sortfield()!=undefined) self.activate(1,self.sortfield());
+            else self.activate(1)
+        }
+        else {
+            if (self.sortfield()!=undefined) self.activate(pg,self.sortfield());
+            else self.activate(pg)
+        }
+    } else {
+        if (pg == undefined) self.activate2(self.pesquisado(), 1);
+        else self.activate2(self.pesquisado(), pg)
+        self.displayName = 'Founded results for <b>' + self.pesquisado() + '</b>';
+    }
+    
+    console.log("VM initialized!");
+};
+
+$(document).ready(function () {
+    console.log("ready!");
+    ko.applyBindings(new vm());
+});
+
+$(document).ajaxComplete(function (event, xhr, options) {
+    $("#myModal").modal('hide');
+})
+
+var Counter = [];
+            var Name = [];
+            
+            $.ajax({
+            type: 'GET',
+            url: 'http://192.168.160.58/Olympics/api/statistics/Games_Athletes',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            success: function (data, status, xhr) {
+            
+            var athData = data;
+            athData.forEach(element => {
+            Counter.push(element.Counter);
+            Name.push(element.Name);
+            });
+            createBarGraph(Counter, Name);
+            }
+            });
+            
+            function createBarGraph(Counter, Name) {
+            let barChart = new Chart("myChart", {
+            type: "bar",
+            data: {
+            labels: Name,
+            datasets: [{
+            data: Counter,
+            label: 'List of Number of Athletes per Olympic Games edition',
+            backgroundColor: ["red","blue","green", "black","gold"]
+            }]
+            },
+            options:{
+                animations: {
+                tension: {
+                    duration: 1000,
+                    easing: 'linear',
+                    from: 1,
+                    to: 0,
+                    loop: true
+                }
+                },
+            }
+            });
+            }

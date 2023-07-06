@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1024px-Olympic_rings_without_rims.svg.png" height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="athletes.html"><i class="fa-regular fa-user text-dark"></i> Athletes</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="competitions.html"><i class="fa-solid fa-trophy text-warning"></i> Competitions</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="countries.html"><i class="fa-regular fa-flag text-success"></i> Countries</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="games.html"><i class="fa-solid fa-location-dot text-danger"></i> Games</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="modalities.html"><i class="fa-regular fa-futbol text-primary"></i> Modalities</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="map.html"><i class="fa-solid fa-map-location-dot text-success"></i> Map</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-chart-column text-info"></i>Statistics</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="statistics1.html">Medals by Country</a></li>
+                            <li><a class="dropdown-item" href="statistics2.html">Countries by Games</a></li>
+                            <li><a class="dropdown-item" href="statistics3.html">Athletes by Games</a></li>
+                        </ul>
+                    </li>                    
+                    <li class="nav-item"><a href="favorites.html" class="nav-link"><i class="fa-solid fa-heart"></i> Favorites</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container" style="padding-top: 35px;">
+        <h1 style="padding-bottom: 10px;">About us Page</h1>
+        <div class="row">
+            <div class="box">
+                <div class="card"  style="margin-bottom: 20px;">
+                  <div class="imgBx">
+                      <img src="Ricardo.jpg" alt="images">
+                  </div>
+                  <div class="details">
+                      <h2>Ricardo Martins<br><span>University Student<br>
+                        Aspiring Software Engineer
+                      </span></h2>
+                  </div>
+                </div>
+              
+                 <div class="card" style="margin-bottom: 40px;">
+                   <div class="imgBx">
+                      <img src="./bruno.jpg" alt="images">
+                   </div>
+                   <div class="details">
+                      <h2>Bruno Charão<br><span>University Student</span></h2>
+                    </div>
+                    
+                 </div>
+    
+            </div>
+        </div>    
+    </div>
+    <br>
+    
+
+    <!-- Acordion -->
+    <div class="container">
+        <div class="accordion w-100" id="accordionExample" style="margin-bottom: 50px">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <b>Welcome To our Website</b>
+            </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>We are two first-year university students who created this website as part of our final project. We are both passionate about technology and the endless possibilities it offers for creating and improving our world.</p>
+        <p>We hope that our website will not only serve as a showcase of our skills and capabilities, but also provide a useful and informative resource for our visitors.</p>
+        <p>Thank you for stopping by, and we hope you enjoy your visit!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Did we enjoy making this website?
+            </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">We enjoyed every part of it!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <div class="text-center">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Tell us something 
+      </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Write your ideas
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="formsfaqs" action="http://192.168.160.36/FormEcho.aspx" name="faqs" autocomplete="off">
+                            <div class="row form-group">
+                                <label for="Nome" class="col-md-2 col-form-label">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="Nome" id="pessoa" class="form-control" />
+                                    <div class="d-none text-danger col-form-label" id="pessoaError">
+                                        <i class="fa fa-exclamation-triangle"></i> (Min: 10 letters; Max: 100 letters).
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group mt-3">
+                                <label for="email" class="col-md-2 col-form-label">Email</label
+                  >
+                  <div class="col-md-10">
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      class="form-control"
+                    />
+                    <div
+                      class="d-none text-danger col-form-label"
+                      id="emailError"
+                    >
+                      <i class="fa fa-exclamation-triangle"></i> (Min: 10
+                      letters; Max: 100 letters).
+                    </div>
+                  </div>
+                </div>
+                <div class="row form-group mt-3">
+                  <label
+                    for="duvtipo"
+                    class="col-md-2 col-form-label text-center"
+                    >Type</label
+                  >
+                  <div class="col-md-10">
+                    <div class="form-check">
+                      <input
+                        type="radio"
+                        name="duvtipo"
+                        class="form-check-input"
+                        value="bugs"
+                      /><label class="form-check-label">Report bugs</label
+                      ><br />
+                      <input
+                        type="radio"
+                        name="duvtipo"
+                        class="form-check-input"
+                        value="duvida"
+                      /><label class="form-check-label">Question</label><br />
+                                <input type="radio" name="duvtipo" class="form-check-input" value="outro" /><label class="form-check-label">Other</label>
+                            </div>
+                            <div class="d-none text-danger col-form-label" id="duvtipoError">
+                                <i class="fa fa-exclamation-triangle"></i> (Choose a type of question).
+                            </div>
+                    </div>
+                </div>
+                <div class="row form-group mt-3">
+                    <label for="duvida" class="col-md-2 col-form-label">Write</label
+                  >
+                  <div class="col-md-10">
+                    <textarea
+                      type="text"
+                      name="duvida"
+                      id="duvida"
+                      class="form-control"
+                      style="min-height: 80px"
+                    >
+                    </textarea>
+                    <div
+                      class="d-none text-danger col-form-label"
+                      id="duvidaError"
+                    >
+                      <i class="fa fa-exclamation-triangle"></i> (Min: 20
+                      letters; Max: 200 letters).
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center form-group mt-3">
+                  <input
+                    type="Submit"
+                    name="submitBtn"
+                    value="Submit"
+                    class="btn btn-danger"
+                  />
+                  <input
+                    type="reset"
+                    name="resetBtn"
+                    value="Clear"
+                    class="btn btn-secondary"
+                    id="clean"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- F/Modal -->
+    <br>
+
+<!-- navbar no fim -->
+    <div class="footer">
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center">
+            <!-- Grid container -->
+            <div class="container p-4">
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                        <h5>Policies</h5>
+                        <ul>
+                            <li><a href="cookiePolicy.html" target="_blank">Cookie Policy</a></li>
+                            <li><a href="privacyPolicy.html" target="_blank">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                        <h5>About Us</h5>
+                        <ul>
+                            <li><a href="about.html" target="_blank">Team</a></li>
+                            <li><a href="about.html" target="_blank">Careers</a></li><br>
+                        </ul>
+                    </div>
+            
+                <!-- Section: Social media -->
+                <section class="mb-4">
+              
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/olympics/" role="button"
+                    alt="Facebook Logo" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/Olympics" role="button"
+                    alt="Twitter Logo" title="Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/Olympics/" role="button"
+                    alt="Instagram Logo" title="Instagram" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <!-- TikTok -->
+                    <a class = "btn btn-outline-light btn-floating m-1" href="https://www.tiktok.com/@olympics" role="button"
+                    alt="TikTok Logo" title="Tiktok" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <!-- Snapchat -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.snapchat.com/add/olympics" role="button"
+                    alt="Snapchat Logo" title="Snapchat" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+                    <!-- Youtube -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/olympics" role="button"
+                    alt="Youtube Logo" title="Youtube" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <!-- Google -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="https://olympics.com/en/athletes/" role="button"
+                    alt="Google Logo" title="Google" target="_blank"><i class="fa-brands fa-google"></i></a>
+                
+                </section>
+                <hr>
+                <span class="b2p-footer__copy text-body-sm">
+                    <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2022/23</div>
+                </span>
+            </div>
+        <!-- Grid container -->
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="about.js"></script>
+
+</body>
+</html>
