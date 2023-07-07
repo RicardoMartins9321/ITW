@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <!-- jquery-->
+    <script src="jquery-3.6.0.min.js"></script>
+    <!-- ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <select id="citySelector" class="form-select" data-bind="value:selecionado,options:availablecities,optionsCaption:'Select a city name..',optionsText:'name', optionsValue: 'cidade'"></select>
+        <!--  event:{change:citychanged} -->
+        <!--options: [lista com opções] OU referencia ao dicionário onde estão as opções e colocar key em optionsText-->
+        <table class="table table-striped" data-bind="with:citydata">
+            <!-- por causa do with n é preciso utilizar if/visible -->
+            <tr>
+                <td class="col-xs-2">City Name:</td>
+                <td class="col-xs-10" data-bind="text:name + ' / ' + sys.country"></td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">Coordinates:</td>
+                <td class="col-xs-10" data-bind="text:'Lon (º): '+ coord.lon+ ' / Lat(º): '+ coord.lat"></td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">weather:</td>
+                <td class="col-xs-10" data-bind="text:weather[0].description"></td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">temp:</td>
+                <td class="col-xs-10" data-bind="text:main.temp.toString() + 'ºK / ' + (main.temp-273.15).toString() + 'ºC'"></td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">pressure:</td>
+                <td class="col-xs-10" data-bind="text:main.pressure"></td>
+            </tr>
+            <tr>
+                <td class="col-xs-2">Dados recolhidos</td>
+                <td class="col-xs-10"><pre data-bind="html:JSON.stringify($parent.citydata(),null,4).replace(/\n/g, '<br>')"></pre></td>
+            </tr>
+        </table>
+    </div>
+    <!--knockout-->
+    <script src="knockout-3.5.1.js"></script>
+</body>
+<script>
+    function MyViewModel() {
+        var self = this //referência a esta função principal
+        self.selecionado = ko.observable() /* assim o valor inicial é undefined - ESTA VARIÁVEL FICA COM A INFORMAÇÃO DO VALOR SELECIONADO*/
+            /* self.selecionado = ko.observable($("#citySelector").val())  /* assim seria null */
+        console.log(self.selecionado())
+        self.availablecities = ko.observableArray([{
+            "name": 'Aveiro',
+            "cidade": "aveiro,pt"
+        }, {
+            "name": 'Porto',
+            "cidade": "porto, PT"
+        }, {
+            "name": 'Paris',
+            "cidade": "paris,fr"
+        }, {
+            "name": 'Londres',
+            "cidade": "london,uk"
+        }, {
+            "name": 'New York',
+            "cidade": "new york,us"
+        }, {"name": 'Moscow',
+            "cidade": "moscow,ru"
+        }])
+        self.citydata = ko.observable() //vai ficar com a informação da api
+        self.citychanged = ko.computed(function() {
+            console.log("New Selection ", self.selecionado())
+            if (self.selecionado() != undefined) { /*  para n fazr chamada se selecionar caption */
+                console.log("working")
+                $.ajax({
+                    url: "http://api.openweathermap.org/data/2.5/weather",
+                    data: {
+                        q: self.selecionado(),
+                        APPID: 'b2b1df463182c3cca5276e9d3267cc95'
+                    },
+                    success: function(data) {
+                        self.citydata(data)
+                        console.log(data)
+                    },
+                    error: function() {
+                        alert("Erro")
+                    }
+                })
+            } else self.citydata(undefined)
+        })
+    }
+
+    $(document).ready(function() {
+        ko.applyBindings(new MyViewModel()); //applyBindings
+    });
+</script>
+</body>
+
+</html>

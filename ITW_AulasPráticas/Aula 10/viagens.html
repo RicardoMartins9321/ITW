@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="page-header">Escolha a classe da passagem...</div>
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="flightClasses" class="control-label"
+            >Choose a ticket class:</label
+          >
+          <select
+            id="flightClasses"
+            class="form-control"
+            data-bind="options:tickets, optionsCaption:'Chose', optionsText: 'name', value: chosenticket; optionsValue: 'price',"
+          ></select>
+        </div>
+        <div class="form-group">
+          <button
+            data-bind="click: resetticket, enable: chosenticket"
+            class="btnbtn-default"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="form-group">
+          <p data-bind="with: chosenticket" class="form-control-static">
+            You have chosen
+            <b data-bind="text: name"> </b>
+            ($
+            <span data-bind="text: price"> </span>)
+          </p>
+        </div>
+      </form>
+    </div>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="knockout-3.5.1.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function Cena() {
+        self.tickets = [
+          { name: "Economy", price: 199.95 },
+          { name: "Business", price: 449.22 },
+          { name: "First Class", price: 1199.99 },
+        ];
+
+        self.chosenticket = ko.observable();
+      }
+
+      self.resetticket = function () {
+        self.chosenticket(null);
+      };
+
+      $(document).ready(function () {
+        ko.applyBindings(new Cena());
+      });
+    </script>
+  </body>
+</html>
